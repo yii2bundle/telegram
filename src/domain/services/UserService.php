@@ -1,9 +1,9 @@
 <?php
 
-namespace yii2bundle\telegram\services;
+namespace yii2bundle\telegram\domain\services;
 
-use yii2bundle\telegram\entities\UserEntity;
-use yii2bundle\telegram\interfaces\services\UserInterface;
+use yii2bundle\telegram\domain\entities\UserEntity;
+use yii2bundle\telegram\domain\interfaces\services\UserInterface;
 use yii\web\NotFoundHttpException;
 use yii2rails\domain\data\Query;
 use yii2rails\domain\services\base\BaseActiveService;
@@ -11,10 +11,10 @@ use yii2rails\domain\services\base\BaseActiveService;
 /**
  * Class UserService
  * 
- * @package yii2bundle\telegram\services
+ * @package yii2bundle\telegram\domain\services
  * 
- * @property-read \yii2bundle\telegram\Domain $domain
- * @property-read \yii2bundle\telegram\interfaces\repositories\UserInterface $repository
+ * @property-read \yii2bundle\telegram\domain\Domain $domain
+ * @property-read \yii2bundle\telegram\domain\interfaces\repositories\UserInterface $repository
  */
 class UserService extends BaseActiveService implements UserInterface {
 

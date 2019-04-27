@@ -1,8 +1,8 @@
 <?php
 
-namespace yii2bundle\telegram\handlers;
+namespace yii2bundle\telegram\domain\handlers;
 
-use yii2bundle\telegram\libs\AppLib;
+use yii2bundle\telegram\domain\libs\AppLib;
 
 abstract class BaseHandler {
 

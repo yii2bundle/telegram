@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2bundle\telegram\actions;
+namespace yii2bundle\telegram\domain\actions;
 
 use TelegramBot\Api\Types\Message;
 use yii2rails\extension\common\helpers\StringHelper;
@@ -25,7 +25,7 @@ class MemoryAction extends BaseAction {
              $expression = str_replace(SPC, '|', $expression);
              \App::$domain->telegram->route->create([
                  'bot_id' => $this->app->botId,
-                 'class' => 'yii2bundle\telegram\routes\InArrayRoute',
+                 'class' => 'yii2bundle\telegram\domain\routes\InArrayRoute',
                  'expression' => $expression,
                  'action_id' => 1,
                  'action_params_json' => '{"text": "' . $answer . '"}',

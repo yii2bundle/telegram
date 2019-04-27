@@ -2,7 +2,7 @@
 
 namespace tests\functional;
 
-use yii2bundle\telegram\helpers\MockResponseHelper;
+use yii2bundle\telegram\domain\helpers\MockResponseHelper;
 use GuzzleHttp\Client;
 use phpbundle\rest\domain\enums\HttpMethodEnum;
 use yii2lab\test\Test\Unit;

@@ -1,16 +1,16 @@
 <?php
 
-namespace yii2bundle\telegram\interfaces\repositories;
+namespace yii2bundle\telegram\domain\interfaces\repositories;
 
-use yii2bundle\telegram\libs\AppLib;
+use yii2bundle\telegram\domain\libs\AppLib;
 use TelegramBot\Api\Types\Message;
 
 /**
  * Interface ResponseInterface
  * 
- * @package yii2bundle\telegram\interfaces\repositories
+ * @package yii2bundle\telegram\domain\interfaces\repositories
  * 
- * @property-read \yii2bundle\telegram\Domain $domain
+ * @property-read \yii2bundle\telegram\domain\Domain $domain
  * @property $columns
  */
 interface ResponseInterface {

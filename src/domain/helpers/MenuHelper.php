@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2bundle\telegram\helpers;
+namespace yii2bundle\telegram\domain\helpers;
 
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
 

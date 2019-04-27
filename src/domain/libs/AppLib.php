@@ -1,10 +1,10 @@
 <?php
 
-namespace yii2bundle\telegram\libs;
+namespace yii2bundle\telegram\domain\libs;
 
-use yii2bundle\telegram\entities\UserEntity;
-use yii2bundle\telegram\helpers\AppHelper;
-use yii2bundle\telegram\interfaces\repositories\ResponseInterface;
+use yii2bundle\telegram\domain\entities\UserEntity;
+use yii2bundle\telegram\domain\helpers\AppHelper;
+use yii2bundle\telegram\domain\interfaces\repositories\ResponseInterface;
 use TelegramBot\Api\Client;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;

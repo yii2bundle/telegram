@@ -2,11 +2,11 @@
 
 use yii\helpers\ArrayHelper;
 use yii2rails\domain\helpers\DomainHelper;
-use yii2bundle\telegram\libs\AppLib;
-use yii2bundle\telegram\helpers\AppHelper;
+use yii2bundle\telegram\domain\libs\AppLib;
+use yii2bundle\telegram\domain\helpers\AppHelper;
 
 DomainHelper::forgeDomains([
-    'telegram' => 'yii2bundle\telegram\Domain',
+    'telegram' => 'yii2bundle\telegram\domain\Domain',
 ]);
 
 $botToken = ArrayHelper::getValue($_GET, 'token');

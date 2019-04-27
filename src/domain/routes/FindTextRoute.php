@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2bundle\telegram\routes;
+namespace yii2bundle\telegram\domain\routes;
 
 use TelegramBot\Api\Types\Message;
 

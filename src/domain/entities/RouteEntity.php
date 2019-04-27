@@ -1,13 +1,13 @@
 <?php
 
-namespace yii2bundle\telegram\entities;
+namespace yii2bundle\telegram\domain\entities;
 
 use yii2rails\domain\BaseEntity;
 
 /**
  * Class RouteEntity
  * 
- * @package yii2bundle\telegram\entities
+ * @package yii2bundle\telegram\domain\entities
  * 
  * @property $id
  * @property $bot_id
@@ -30,7 +30,7 @@ class RouteEntity extends BaseEntity {
 	protected $bot_id;
     protected $state = 'default';
     protected $sort = 100;
-	protected $class = 'yii2bundle\telegram\routes\RegexpRoute';
+	protected $class = 'yii2bundle\telegram\domain\routes\RegexpRoute';
     protected $expression;
 	protected $params;
     protected $params_json = '{}';

@@ -1,10 +1,10 @@
 <?php
 
-namespace yii2bundle\telegram\routes;
+namespace yii2bundle\telegram\domain\routes;
 
 use TelegramBot\Api\Types\Message;
 use yii2rails\extension\common\helpers\ClassHelper;
-use yii2bundle\telegram\handlers\BaseHandler;
+use yii2bundle\telegram\domain\handlers\BaseHandler;
 
 abstract class BaseRoute extends BaseHandler {
 	

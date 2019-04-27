@@ -1,11 +1,11 @@
 <?php
 
-namespace yii2bundle\telegram\helpers;
+namespace yii2bundle\telegram\domain\helpers;
 
-use yii2bundle\telegram\entities\BotEntity;
-use yii2bundle\telegram\libs\RouteCollection;
-use yii2bundle\telegram\routes\RegexpRoute;
-use yii2bundle\telegram\actions\ShowTextAction;
+use yii2bundle\telegram\domain\entities\BotEntity;
+use yii2bundle\telegram\domain\libs\RouteCollection;
+use yii2bundle\telegram\domain\routes\RegexpRoute;
+use yii2bundle\telegram\domain\actions\ShowTextAction;
 use domain\shop\helpers\RouteHelper;
 use yii2rails\extension\yii\helpers\ArrayHelper;
 use yii2rails\extension\common\helpers\StringHelper;

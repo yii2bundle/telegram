@@ -1,17 +1,17 @@
 <?php
 
-namespace yii2bundle\telegram\repositories\ar;
+namespace yii2bundle\telegram\domain\repositories\ar;
 
-use yii2bundle\telegram\interfaces\repositories\UserInterface;
+use yii2bundle\telegram\domain\interfaces\repositories\UserInterface;
 use yii2rails\domain\repositories\BaseRepository;
 use yii2rails\extension\activeRecord\repositories\base\BaseActiveArRepository;
 
 /**
  * Class UserRepository
  * 
- * @package yii2bundle\telegram\repositories\ar
+ * @package yii2bundle\telegram\domain\repositories\ar
  * 
- * @property-read \yii2bundle\telegram\Domain $domain
+ * @property-read \yii2bundle\telegram\domain\Domain $domain
  */
 class UserRepository extends BaseActiveArRepository implements UserInterface {
 

@@ -1,19 +1,19 @@
 <?php
 
-namespace yii2bundle\telegram\repositories\telegram;
+namespace yii2bundle\telegram\domain\repositories\telegram;
 
-use yii2bundle\telegram\helpers\MenuHelper;
-use yii2bundle\telegram\interfaces\repositories\ResponseInterface;
-use yii2bundle\telegram\libs\AppLib;
+use yii2bundle\telegram\domain\helpers\MenuHelper;
+use yii2bundle\telegram\domain\interfaces\repositories\ResponseInterface;
+use yii2bundle\telegram\domain\libs\AppLib;
 use TelegramBot\Api\Types\Message;
 use yii2rails\domain\repositories\BaseRepository;
 
 /**
  * Class ResponseRepository
  * 
- * @package yii2bundle\telegram\repositories\telegram
+ * @package yii2bundle\telegram\domain\repositories\telegram
  * 
- * @property-read \yii2bundle\telegram\Domain $domain
+ * @property-read \yii2bundle\telegram\domain\Domain $domain
  */
 class ResponseRepository extends BaseRepository implements ResponseInterface {
 

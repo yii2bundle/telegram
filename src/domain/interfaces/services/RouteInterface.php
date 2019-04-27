@@ -1,17 +1,17 @@
 <?php
 
-namespace yii2bundle\telegram\interfaces\services;
+namespace yii2bundle\telegram\domain\interfaces\services;
 
-use yii2bundle\telegram\entities\RouteEntity;
+use yii2bundle\telegram\domain\entities\RouteEntity;
 use yii2rails\domain\interfaces\services\CrudInterface;
 
 /**
  * Interface RouteInterface
  * 
- * @package yii2bundle\telegram\interfaces\services
+ * @package yii2bundle\telegram\domain\interfaces\services
  * 
- * @property-read \yii2bundle\telegram\Domain $domain
- * @property-read \yii2bundle\telegram\interfaces\repositories\RouteInterface $repository
+ * @property-read \yii2bundle\telegram\domain\Domain $domain
+ * @property-read \yii2bundle\telegram\domain\interfaces\repositories\RouteInterface $repository
  */
 interface RouteInterface extends CrudInterface {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2bundle\telegram\repositories\schema;
+namespace yii2bundle\telegram\domain\repositories\schema;
 
 use yii2rails\domain\enums\RelationEnum;
 use yii2rails\domain\repositories\relations\BaseSchema;
@@ -8,7 +8,7 @@ use yii2rails\domain\repositories\relations\BaseSchema;
 /**
  * Class RouteSchema
  * 
- * @package yii2bundle\telegram\repositories\schema
+ * @package yii2bundle\telegram\domain\repositories\schema
  * 
  */
 class RouteSchema extends BaseSchema {

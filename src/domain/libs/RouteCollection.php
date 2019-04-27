@@ -1,6 +1,6 @@
 <?php
 
-namespace yii2bundle\telegram\libs;
+namespace yii2bundle\telegram\domain\libs;
 
 use yii2rails\extension\arrayTools\base\BaseCollection;
 
