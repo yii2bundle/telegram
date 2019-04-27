@@ -1,0 +1,26 @@
+{
+	"name": "yii2bundle/yii2-telegram",
+	"type": "yii2-telegram",
+	"keywords": [
+		"yii2",
+		"telegram"
+	],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Yamshikov Vitaliy",
+			"email": "theyamshikov@yandex.ru"
+		}
+	],
+	"minimum-stability": "dev",
+	"autoload": {
+		"psr-4": {
+			"yii2bundle\\telegram\\": "src",
+			"yii2bundle\\telegram\\tests\\": "tests"
+		}
+	},
+	"require": {
+		"telegram-bot/api": "v2.3.13",
+		"php": ">=5.4.0"
+	}
+}
