@@ -2,6 +2,7 @@
 
 namespace yii2bundle\telegram\domain\libs;
 
+use yii2bundle\telegram\domain\entities\BotEntity;
 use yii2bundle\telegram\domain\entities\UserEntity;
 use yii2bundle\telegram\domain\helpers\AppHelper;
 use yii2bundle\telegram\domain\interfaces\repositories\ResponseInterface;
@@ -20,7 +21,7 @@ class AppLib {
      */
 	public $bot;
 	public $botId;
-	public $handlers;
+	public $routes;
 	public $request;
 
     /**
@@ -34,15 +35,15 @@ class AppLib {
     public $response;
 	private $isHandled = false;
 	
-	public function __construct($botToken) {
-		$botEntity = AppHelper::forgeBotEntityFromToken($botToken);
+	public function __construct(BotEntity $botEntity) {
+        //$botEntity = \App::$domain->telegram->bot->oneByToken($botToken);
+		//$botEntity = AppHelper::forgeBotEntityFromToken($botToken);
         $this->botId = $botEntity->id;
 		$this->bot = new Client($botEntity->token);
         $req = file_get_contents('php://input');
         $this->request = \GuzzleHttp\json_decode($req);
         $this->userEntity = \App::$domain->telegram->user->oneByFrom($this->request->message->from, $this->botId);
 
-		//$this->response = new Response($this);
         \App::$domain->telegram->response->repository->setApp($this);
         \App::$domain->telegram->response->repository->columns = 4;
 		$this->response = \App::$domain->telegram->response->repository;
@@ -53,10 +54,10 @@ class AppLib {
         }
 	}
 
-	public function setRoutes($handlers) {
-		$this->handlers = $handlers;
+	public function setRoutes($routes) {
+		$this->routes = $routes;
 		// Отлов любых сообщений + обработка reply-кнопок
-		$this->bot->on($this->updateHandler(), function(Update $message) {
+		$this->bot->on($this->onUpdateClosure(), function(Update $message) {
 			return true; // когда тут true - команда проходит
 		});
 	}
@@ -102,20 +103,20 @@ class AppLib {
 		return $this->isHandled;
 	}
 	
-	public function updateHandler() {
+	public function onUpdateClosure() {
 		return function(Update $update) {
 			$message = $update->getMessage();
 			$this->handleMessage($message);
 		};
 	}
-	
+
 	public function handleMessage(Message $message) {
 		$this->isHandled = false;
-		foreach($this->handlers as $pattern => $handler) {
-			$h = ClassHelper::createObject($handler, [$this]);
-			$h->name = $pattern;
-			if($h->isMatch($message)) {
-				$h->run($message);
+		foreach($this->routes as $pattern => $route) {
+			$handlerInstace = ClassHelper::createObject($route, [$this]);
+			$handlerInstace->name = $pattern;
+			if($handlerInstace->isMatch($message)) {
+				$handlerInstace->run($message);
 				$this->isHandled = true;
 				return;
 			}
