@@ -18,6 +18,9 @@ use yii2rails\domain\services\base\BaseActiveService;
 class BotService extends BaseActiveService implements BotInterface {
 
     public function oneByParam(string $param) : BotEntity {
+        if(empty($param)) {
+            throw new \Exception('Empty bot token!');
+        }
         if(is_numeric($param)) {
             $id = intval($param);
             $botEntity = $this->oneById($id);

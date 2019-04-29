@@ -6,21 +6,12 @@ use yii2bundle\telegram\domain\libs\AppLib;
 use yii2bundle\telegram\domain\helpers\AppHelper;
 use yii2rails\domain\enums\Driver;
 
-$domainDefinition = DomainHelper::getClassConfig('telegram', 'yii2bundle\telegram\domain\Domain', [
-    'repositories' => [
-        //'response' => 'telegram',
-        'response' => 'http',
-    ],
-]);
-App::$domain->set('telegram', $domainDefinition);
+$domains = include(ROOT_DIR . '/telegram/config/domains.php');
+DomainHelper::forgeDomains2($domains);
 
 $botToken = ArrayHelper::getValue($_GET, 'token');
-
-if(empty($botToken)) {
-    throw new \Exception('Empty bot token!');
-}
-
 $botEntity = \App::$domain->telegram->bot->oneByParam($botToken);
+
 $app = new AppLib($botEntity);
 $routeCollection = \App::$domain->telegram->route->allByBotId($app->botId, $app->userEntity->state);
 $routes = AppHelper::forgeRoutesFromRouteCollection($routeCollection);

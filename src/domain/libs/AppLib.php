@@ -10,11 +10,10 @@ use TelegramBot\Api\Client;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 use yii\web\NotFoundHttpException;
+use yii2bundle\telegram\domain\routes\BaseRoute;
 use yii2rails\extension\common\helpers\ClassHelper;
 
 class AppLib {
-	
-	const CACHE_KEY = 'telegram_bot_scenario_2';
 
     /**
      * @var Client
@@ -33,11 +32,8 @@ class AppLib {
      * @var ResponseInterface
      */
     public $response;
-	private $isHandled = false;
 	
 	public function __construct(BotEntity $botEntity) {
-        //$botEntity = \App::$domain->telegram->bot->oneByToken($botToken);
-		//$botEntity = AppHelper::forgeBotEntityFromToken($botToken);
         $this->botId = $botEntity->id;
 		$this->bot = new Client($botEntity->token);
         $req = file_get_contents('php://input');
@@ -98,11 +94,7 @@ class AppLib {
 	public function clearState() {
 		$this->setState('default');
 	}
-	
-	public function isHandled() {
-		return $this->isHandled;
-	}
-	
+
 	public function onUpdateClosure() {
 		return function(Update $update) {
 			$message = $update->getMessage();
@@ -111,13 +103,12 @@ class AppLib {
 	}
 
 	public function handleMessage(Message $message) {
-		$this->isHandled = false;
 		foreach($this->routes as $pattern => $route) {
-			$handlerInstace = ClassHelper::createObject($route, [$this]);
+            /** @var BaseRoute $handlerInstace */
+		    $handlerInstace = ClassHelper::createObject($route, [$this]);
 			$handlerInstace->name = $pattern;
 			if($handlerInstace->isMatch($message)) {
 				$handlerInstace->run($message);
-				$this->isHandled = true;
 				return;
 			}
 		}

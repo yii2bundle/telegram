@@ -11,9 +11,10 @@ abstract class BaseRoute extends BaseHandler {
 	public $exp;
     public $params;
 	public $handler;
+    public $action;
 
     public function run(Message $message) {
-        $handlerInstance = ClassHelper::createObject($this->handler, [$this->app]);
+        $handlerInstance = ClassHelper::createObject($this->action, [$this->app]);
         $handlerInstance->run($message);
     }
 

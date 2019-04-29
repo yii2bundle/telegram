@@ -14,25 +14,29 @@ class AppHelper {
 
     public static function forgeRoutesFromRouteCollection($routeCollection, $routes = []) {
         foreach ($routeCollection as $routeEntity) {
-            $route = [
-                'class' => $routeEntity->class,
-                'handler' => [
-                    'class' => $routeEntity->action->class,
-                ],
-            ];
-            if($routeEntity->params) {
-                foreach ($routeEntity->params as $k => $v) {
-                    $route[$k] = $v;
-                }
-            }
-            if($routeEntity->action_params) {
-                foreach ($routeEntity->action_params as $k => $v) {
-                    $route['handler'][$k] = $v;
-                }
-            }
-            $routes[] = $route;
+            $routes[] = self::forgeRoute($routeEntity);
         }
         return $routes;
+    }
+
+    private static function forgeRoute($routeEntity) {
+        $route = [
+            'class' => $routeEntity->class,
+            'action' => [
+                'class' => $routeEntity->action->class,
+            ],
+        ];
+        if($routeEntity->params) {
+            foreach ($routeEntity->params as $k => $v) {
+                $route[$k] = $v;
+            }
+        }
+        if($routeEntity->action_params) {
+            foreach ($routeEntity->action_params as $k => $v) {
+                $route['action'][$k] = $v;
+            }
+        }
+        return $route;
     }
 
 }
