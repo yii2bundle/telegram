@@ -27,8 +27,8 @@ class RegexpRoute extends BaseRoute {
 	
 	private function matchExp(Message $message) {
 		$text = $message->getText();
-		$text = strtolower($text);
-		$exp = strtolower($this->exp);
+		$text = mb_strtolower($text);
+		$exp = mb_strtolower($this->exp);
 		$isMatch = preg_match('/'.$exp.'/i', $text, $matches);
 		if(!$isMatch) {
 			return false;

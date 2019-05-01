@@ -13,6 +13,7 @@ use yii2rails\domain\enums\Driver;
  * @property-read \yii2bundle\telegram\domain\interfaces\services\RouteInterface $route
  * @property-read \yii2bundle\telegram\domain\interfaces\services\ActionInterface $action
  * @property-read \yii2bundle\telegram\domain\interfaces\services\UserInterface $user
+ * @property-read \yii2bundle\telegram\domain\interfaces\services\UserAssignmentInterface $userAssignment
  * @property-read \yii2bundle\telegram\domain\interfaces\services\ResponseInterface $response
  */
 class Domain extends \yii2rails\domain\Domain {
@@ -24,6 +25,7 @@ class Domain extends \yii2rails\domain\Domain {
                 'route' => Driver::ACTIVE_RECORD,
                 'action' => Driver::ACTIVE_RECORD,
                 'user' => Driver::ACTIVE_RECORD,
+                'userAssignment' => Driver::ACTIVE_RECORD,
                 //'response' => 'telegram',
                 'response' => 'mock',
 			],
@@ -33,6 +35,7 @@ class Domain extends \yii2rails\domain\Domain {
                 'action',
                 'user',
                 'response',
+                'userAssignment',
 			],
 		];
 	}

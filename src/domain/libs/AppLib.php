@@ -2,6 +2,8 @@
 
 namespace yii2bundle\telegram\domain\libs;
 
+use TelegramBot\Api\BotApi;
+use yii\helpers\ArrayHelper;
 use yii2bundle\telegram\domain\entities\BotEntity;
 use yii2bundle\telegram\domain\entities\UserEntity;
 use yii2bundle\telegram\domain\helpers\AppHelper;
@@ -16,7 +18,7 @@ use yii2rails\extension\common\helpers\ClassHelper;
 class AppLib {
 
     /**
-     * @var Client
+     * @var BotApi
      */
 	public $bot;
 	public $botId;
@@ -49,6 +51,16 @@ class AppLib {
             throw new NotFoundHttpException('Bot not found!', 0, $e);
         }
 	}
+
+	public function can($roles) {
+        $roles = ArrayHelper::toArray($roles);
+        foreach ($roles as $role) {
+            if(in_array($role, $this->userEntity->roles)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 	public function setRoutes($routes) {
 		$this->routes = $routes;

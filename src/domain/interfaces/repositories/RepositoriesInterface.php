@@ -12,6 +12,7 @@ namespace yii2bundle\telegram\domain\interfaces\repositories;
  * @property-read \yii2bundle\telegram\domain\interfaces\repositories\ResponseInterface $response
  * @property-read \yii2bundle\telegram\domain\interfaces\repositories\RouteInterface $route
  * @property-read \yii2bundle\telegram\domain\interfaces\repositories\UserInterface $user
+ * @property-read \yii2bundle\telegram\domain\interfaces\repositories\UserAssignmentInterface $userAssignment
  */
 interface RepositoriesInterface {
 

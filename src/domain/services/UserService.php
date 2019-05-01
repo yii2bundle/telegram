@@ -36,6 +36,7 @@ class UserService extends BaseActiveService implements UserInterface {
                 'user_id' => $from->id,
                 'bot_id' => $botId,
             ]);
+            $query->with('assignments');
             $userEntity = $this->one($query);
         } catch (NotFoundHttpException $e) {
             $userEntity = new UserEntity;

@@ -29,13 +29,13 @@ class ResponseRepository extends BaseRepository implements ResponseInterface {
 
     public function sendMessage(Message $message, $answerText) {
         $cid = $message->getChat()->getId();
-        return $this->app->bot->sendMessage($cid, $answerText);
+        return $this->app->bot->sendMessage($cid, $answerText, 'markdown', true);
     }
 
-    public function sendKeyboard(Message $message, $answerText, $keys) {
+    public function sendKeyboard(Message $message, $answerText, $keys, $columns = 3) {
         $cid = $message->getChat()->getId();
-        $keyboard = MenuHelper::createKeyboard($keys);
-        return $this->app->bot->sendMessage($cid, $answerText, false, null,null, $keyboard);
+        $keyboard = MenuHelper::createKeyboard($keys, $columns);
+        return $this->app->bot->sendMessage($cid, $answerText, 'markdown', null,null, $keyboard);
     }
 
     public function sendImage(Message $message, $photo, $caption = null, $replyToMessageId = null, $replyMarkup = null, $disableNotification = false, $parseMode = null) {

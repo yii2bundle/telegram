@@ -2,6 +2,7 @@
 
 namespace yii2bundle\telegram\domain\entities;
 
+use yii\helpers\ArrayHelper;
 use yii2rails\domain\BaseEntity;
 
 /**
@@ -18,6 +19,8 @@ use yii2rails\domain\BaseEntity;
  * @property $state
  * @property $session
  * @property $settings
+ * @property $assignments
+ * @property $roles
  */
 class UserEntity extends BaseEntity {
 
@@ -30,5 +33,14 @@ class UserEntity extends BaseEntity {
 	protected $state = 'default';
 	protected $session = '{}';
 	protected $settings = '{}';
+    protected $assignments;
+    protected $roles;
+
+    public function getRoles() {
+        if(empty($this->assignments)) {
+            return null;
+        }
+        return ArrayHelper::getColumn($this->assignments, 'role_name');
+    }
 
 }

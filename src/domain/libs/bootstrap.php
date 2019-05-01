@@ -14,6 +14,8 @@ $botEntity = \App::$domain->telegram->bot->oneByParam($botToken);
 
 $app = new AppLib($botEntity);
 $routeCollection = \App::$domain->telegram->route->allByBotId($app->botId, $app->userEntity->state);
+$defaultRouteCollection = \App::$domain->telegram->route->allByBotId($app->botId, '*');
+$routeCollection = ArrayHelper::merge($defaultRouteCollection, $routeCollection);
 $routes = AppHelper::forgeRoutesFromRouteCollection($routeCollection);
 $app->setRoutes($routes);
 $app->run();

@@ -17,7 +17,7 @@ interface ResponseInterface {
 
     public function setApp(AppLib $app);
     public function sendMessage(Message $message, $answerText);
-    public function sendKeyboard(Message $message, $answerText, $keys);
+    public function sendKeyboard(Message $message, $answerText, $keys, $columns = 3);
     public function sendImage(Message $message, $photo, $caption = null, $replyToMessageId = null, $replyMarkup = null, $disableNotification = false, $parseMode = null);
 
 }
