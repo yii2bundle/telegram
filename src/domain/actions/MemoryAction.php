@@ -16,8 +16,8 @@ class MemoryAction extends BaseAction {
 	     if(\App::$domain->telegram->state->get() == 'default') {
              \App::$domain->telegram->state->set('dialog.expression');
              $text = 'Введите ответ на фразу: "' . $expression . '""';
-             //\App::$domain->telegram->app->response->sendMessage($message, $text);
-             \App::$domain->telegram->app->response->sendKeyboard($message, $text, ['отмена']);
+             //\App::$domain->telegram->response->sendMessage($message, $text);
+             \App::$domain->telegram->response->sendKeyboard($message, $text, ['отмена']);
          } elseif (\App::$domain->telegram->state->get() == 'dialog.expression') {
              $answer = $message->getText();
              $answer = StringHelper::removeDoubleSpace($answer);
@@ -30,7 +30,7 @@ class MemoryAction extends BaseAction {
                  'action_id' => 1,
                  'action_params_json' => '{"text": "' . $answer . '"}',
              ]);
-             \App::$domain->telegram->app->response->sendMessage($message, '✅ запомнила');
+             \App::$domain->telegram->response->sendMessage($message, '✅ запомнила');
              \App::$domain->telegram->state->clear();
          }
 	}

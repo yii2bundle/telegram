@@ -19,16 +19,6 @@ use yii2rails\domain\repositories\BaseRepository;
  */
 class ResponseRepository extends BaseRepository implements ResponseInterface {
 
-    /**
-     * @var AppLib
-     */
-    protected $app;
-    public $columns = 3;
-
-    public function setApp(/*AppLib*/ $app) {
-        $this->app = $app;
-    }
-
     public function send($commandEntity) {
         $bot = \App::$domain->telegram->app->bot;
         return Message::fromResponse($bot->call($commandEntity->command(), $commandEntity->toArray()));

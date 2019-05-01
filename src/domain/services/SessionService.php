@@ -42,4 +42,9 @@ class SessionService extends BaseService /*implements SessionInterface*/ {
         return $session;
     }
 
+    public function clear() {
+        \App::$domain->telegram->app->userEntity->session = [];
+        \App::$domain->telegram->user->update($this->userEntity);
+    }
+
 }

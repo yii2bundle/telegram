@@ -11,7 +11,7 @@ class SetStateAction extends BaseAction {
 
 	public function run(Message $message) {
         \App::$domain->telegram->state->set($this->state);
-        \App::$domain->telegram->app->response->sendMessage($message, '✅ отменено');
+        \App::$domain->telegram->response->sendMessage($message, '✅ отменено');
 	}
 	
 }

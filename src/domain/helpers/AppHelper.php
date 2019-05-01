@@ -32,23 +32,9 @@ class AppHelper {
         return $route;
     }
 
-    private static function forgeActionDefinition(RouteEntity $routeEntity) {
-        $action = [];
-        $actionClass = ArrayHelper::getValue($routeEntity, 'action.class');
-        if($actionClass) {
-            $action['class'] = $actionClass;
-        }
-        if($routeEntity->action_params) {
-            foreach ($routeEntity->action_params as $k => $v) {
-                $action[$k] = $v;
-            }
-        }
-        return $action;
-    }
-
     private static function forgeRoute(RouteEntity $routeEntity) {
         $route = self::forgeRouteDefinition($routeEntity);
-        $route['action'] = self::forgeActionDefinition($routeEntity);
+        $route['action'] = $routeEntity->action_params;
         return $route;
     }
 

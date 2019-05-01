@@ -16,7 +16,7 @@ use yii2bundle\telegram\domain\services\AppService;
  */
 interface ResponseInterface {
 
-    public function setApp(AppService $app);
+    //public function setApp(AppService $app);
     public function sendMessage(Message $message, $answerText);
     public function sendKeyboard(Message $message, $answerText, $keys, $columns = 3);
     public function sendImage(Message $message, $photo, $caption = null, $replyToMessageId = null, $replyMarkup = null, $disableNotification = false, $parseMode = null);

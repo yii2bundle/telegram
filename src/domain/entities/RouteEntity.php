@@ -17,12 +17,9 @@ use yii2rails\domain\BaseEntity;
  * @property $expression
  * @property $params
  * @property $params_json
- * @property $action_id
  * @property $action_params
  * @property $action_params_json
  * @property $status
- *
- * @property ActionEntity $action
  */
 class RouteEntity extends BaseEntity {
 
@@ -34,22 +31,19 @@ class RouteEntity extends BaseEntity {
     protected $expression;
 	protected $params;
     protected $params_json = '{}';
-	protected $action_id;
 	protected $action_params;
     protected $action_params_json = '{}';
     protected $status = 1;
-
-    protected $action;
 
     public function getParams() {
         $params = json_decode($this->params_json);
         if($this->expression) {
             $params->exp = $this->expression;
         }
-        return $params;
+        return (array) $params;
     }
 
     public function getActionParams() {
-        return json_decode($this->action_params_json);
+        return (array) json_decode($this->action_params_json);
     }
 }

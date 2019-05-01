@@ -33,29 +33,19 @@ class AppService extends BaseService /*implements AppInterface*/ {
     public $bot;
     public $botId;
     private $routes;
-    public $request;
 
     /**
      * @var UserEntity
      */
     public $userEntity;
 
-    /**
-     * @var ResponseInterface
-     */
-    public $response;
-
     public function setBot(BotEntity $botEntity) {
         $this->botId = $botEntity->id;
         $this->bot = new Client($botEntity->token);
 
         $req = file_get_contents('php://input');
-        $this->request = \GuzzleHttp\json_decode($req);
-        $this->userEntity = \App::$domain->telegram->user->oneByFrom($this->request->message->from, $this->botId);
-
-        \App::$domain->telegram->response->repository->setApp($this);
-        \App::$domain->telegram->response->repository->columns = 4;
-        $this->response = \App::$domain->telegram->response->repository;
+        $request = \GuzzleHttp\json_decode($req);
+        $this->userEntity = \App::$domain->telegram->user->oneByFrom($request->message->from, $this->botId);
 
         try {
             \App::$domain->telegram->bot->oneById($botEntity->id);
@@ -84,11 +74,6 @@ class AppService extends BaseService /*implements AppInterface*/ {
 
     public function run() {
         $this->bot->run();
-    }
-
-    public function clear() {
-        $this->userEntity->session = [];
-        \App::$domain->telegram->user->update($this->userEntity);
     }
 
     public function onUpdateClosure() {

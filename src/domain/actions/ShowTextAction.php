@@ -9,7 +9,7 @@ class ShowTextAction extends BaseAction {
 	public $text;
 	
 	public function run(Message $message) {
-        \App::$domain->telegram->app->response->sendMessage($message, $this->text);
+        \App::$domain->telegram->response->sendMessage($message, $this->text);
 	}
 	
 }
