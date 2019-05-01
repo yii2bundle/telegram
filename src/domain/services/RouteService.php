@@ -25,7 +25,7 @@ class RouteService extends BaseActiveService implements RouteInterface {
             'state' => $state,
         ]);
         $query->orderBy(['sort' => SORT_ASC]);
-        $query->with(['action']);
+        //$query->with(['action']);
         return $this->all($query);
     }
 
