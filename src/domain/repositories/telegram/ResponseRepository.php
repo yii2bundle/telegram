@@ -2,6 +2,8 @@
 
 namespace yii2bundle\telegram\domain\repositories\telegram;
 
+use yii2bundle\telegram\domain\entities\command\MessageCommandEntity;
+use yii2bundle\telegram\domain\entities\command\PhotoCommandEntity;
 use yii2bundle\telegram\domain\helpers\MenuHelper;
 use yii2bundle\telegram\domain\interfaces\repositories\ResponseInterface;
 use yii2bundle\telegram\domain\libs\AppLib;
@@ -23,24 +25,38 @@ class ResponseRepository extends BaseRepository implements ResponseInterface {
     protected $app;
     public $columns = 3;
 
-    public function setApp(AppLib $app) {
+    public function setApp(/*AppLib*/ $app) {
         $this->app = $app;
     }
 
+    public function send($commandEntity) {
+        $bot = \App::$domain->telegram->app->bot;
+        return Message::fromResponse($bot->call($commandEntity->command(), $commandEntity->toArray()));
+    }
+
     public function sendMessage(Message $message, $answerText) {
-        $cid = $message->getChat()->getId();
-        return $this->app->bot->sendMessage($cid, $answerText, 'markdown', true);
+        $commandEntity = new MessageCommandEntity;
+        $commandEntity->chat_id = $message->getChat()->getId();
+        $commandEntity->text = $answerText;
+        $commandEntity->parse_mode = 'markdown';
+        return $this->send($commandEntity);
     }
 
     public function sendKeyboard(Message $message, $answerText, $keys, $columns = 3) {
-        $cid = $message->getChat()->getId();
-        $keyboard = MenuHelper::createKeyboard($keys, $columns);
-        return $this->app->bot->sendMessage($cid, $answerText, 'markdown', null,null, $keyboard);
+        $commandEntity = new MessageCommandEntity;
+        $commandEntity->chat_id = $message->getChat()->getId();
+        $commandEntity->text = $answerText;
+        $commandEntity->parse_mode = 'markdown';
+        $commandEntity->setKeyboard($keys, $columns);
+        return $this->send($commandEntity);
     }
 
     public function sendImage(Message $message, $photo, $caption = null, $replyToMessageId = null, $replyMarkup = null, $disableNotification = false, $parseMode = null) {
-        $cid = $message->getChat()->getId();
-        return $this->app->bot->sendPhoto($cid, $photo, $caption, $replyToMessageId, $replyMarkup, $disableNotification, $parseMode);
-    }
+        $commandEntity = new PhotoCommandEntity;
+        $commandEntity->chat_id = $message->getChat()->getId();
+        $commandEntity->photo = $photo;
+        $commandEntity->caption = $caption;
+        return $this->send($commandEntity);
+   }
 
 }

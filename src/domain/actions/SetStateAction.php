@@ -10,8 +10,8 @@ class SetStateAction extends BaseAction {
 	public $state = StateEnum::DEFAULT;
 
 	public function run(Message $message) {
-        $this->app->setState($this->state);
-        $this->app->response->sendMessage($message, '✅ отменено');
+        \App::$domain->telegram->state->set($this->state);
+        \App::$domain->telegram->app->response->sendMessage($message, '✅ отменено');
 	}
 	
 }

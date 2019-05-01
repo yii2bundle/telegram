@@ -11,27 +11,27 @@ class MemoryAction extends BaseAction {
 	public $exp = 'запомни\s+(.+)\s*\-\s*(.+)';
 	
 	public function run(Message $message) {
-        $expression = $this->app->getSession('dialog.expression');
+        $expression = \App::$domain->telegram->session->get('dialog.expression');
         $expression = $this->normalizeExpression($expression);
-	     if($this->app->getState() == 'default') {
-             $this->app->setState('dialog.expression');
+	     if(\App::$domain->telegram->state->get() == 'default') {
+             \App::$domain->telegram->state->set('dialog.expression');
              $text = 'Введите ответ на фразу: "' . $expression . '""';
-             //$this->app->response->sendMessage($message, $text);
-             $this->app->response->sendKeyboard($message, $text, ['отмена']);
-         } elseif ($this->app->getState() == 'dialog.expression') {
+             //\App::$domain->telegram->app->response->sendMessage($message, $text);
+             \App::$domain->telegram->app->response->sendKeyboard($message, $text, ['отмена']);
+         } elseif (\App::$domain->telegram->state->get() == 'dialog.expression') {
              $answer = $message->getText();
              $answer = StringHelper::removeDoubleSpace($answer);
              $answer = trim($answer);
              $expression = str_replace(SPC, '|', $expression);
              \App::$domain->telegram->route->create([
-                 'bot_id' => $this->app->botId,
+                 'bot_id' => \App::$domain->telegram->app->botId,
                  'class' => 'yii2bundle\telegram\domain\routes\InArrayRoute',
                  'expression' => $expression,
                  'action_id' => 1,
                  'action_params_json' => '{"text": "' . $answer . '"}',
              ]);
-             $this->app->response->sendMessage($message, '✅ запомнила');
-             $this->app->clearState();
+             \App::$domain->telegram->app->response->sendMessage($message, '✅ запомнила');
+             \App::$domain->telegram->state->clear();
          }
 	}
 

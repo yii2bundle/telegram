@@ -10,7 +10,7 @@ class MenuAction extends BaseAction {
     public $keyboard;
 	
 	public function run(Message $message) {
-        $this->app->response->sendKeyboard($message, $this->text, $this->keyboard);
+        \App::$domain->telegram->app->response->sendKeyboard($message, $this->text, $this->keyboard);
 	}
 	
 }

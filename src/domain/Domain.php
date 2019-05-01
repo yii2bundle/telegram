@@ -15,6 +15,9 @@ use yii2rails\domain\enums\Driver;
  * @property-read \yii2bundle\telegram\domain\interfaces\services\UserInterface $user
  * @property-read \yii2bundle\telegram\domain\interfaces\services\UserAssignmentInterface $userAssignment
  * @property-read \yii2bundle\telegram\domain\interfaces\services\ResponseInterface $response
+ * @property-read \yii2bundle\telegram\domain\services\AppService $app
+ * @property-read \yii2bundle\telegram\domain\services\SessionService $session
+ * @property-read \yii2bundle\telegram\domain\services\StateService $state
  */
 class Domain extends \yii2rails\domain\Domain {
 	
@@ -36,6 +39,9 @@ class Domain extends \yii2rails\domain\Domain {
                 'user',
                 'response',
                 'userAssignment',
+                'app',
+                'session',
+                'state',
 			],
 		];
 	}

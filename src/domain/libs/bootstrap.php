@@ -12,10 +12,10 @@ DomainHelper::forgeDomains2($domains);
 $botToken = ArrayHelper::getValue($_GET, 'token');
 $botEntity = \App::$domain->telegram->bot->oneByParam($botToken);
 
-$app = new AppLib($botEntity);
-$routeCollection = \App::$domain->telegram->route->allByBotId($app->botId, $app->userEntity->state);
-$defaultRouteCollection = \App::$domain->telegram->route->allByBotId($app->botId, '*');
+\App::$domain->telegram->app->setBot($botEntity);
+$routeCollection = \App::$domain->telegram->route->allByBotId(\App::$domain->telegram->app->botId, \App::$domain->telegram->app->userEntity->state);
+$defaultRouteCollection = \App::$domain->telegram->route->allByBotId(\App::$domain->telegram->app->botId, '*');
 $routeCollection = ArrayHelper::merge($defaultRouteCollection, $routeCollection);
 $routes = AppHelper::forgeRoutesFromRouteCollection($routeCollection);
-$app->setRoutes($routes);
-$app->run();
+\App::$domain->telegram->app->setRoutes($routes);
+\App::$domain->telegram->app->run();

@@ -11,8 +11,8 @@ class UnknownAction extends BaseAction {
 	
 	public function run(Message $message) {
         $expression = $message->getText();
-        $this->app->setSession('dialog.expression', $expression);
-        $this->app->response->sendKeyboard($message, $this->text, $this->keyboard);
+        \App::$domain->telegram->session->set('dialog.expression', $expression);
+        \App::$domain->telegram->app->response->sendKeyboard($message, $this->text, $this->keyboard);
 	}
 	
 }

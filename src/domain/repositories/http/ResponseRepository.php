@@ -7,6 +7,7 @@ use yii2bundle\telegram\domain\helpers\MockResponseHelper;
 use yii2bundle\telegram\domain\interfaces\repositories\ResponseInterface;
 use yii2bundle\telegram\domain\libs\AppLib;
 use TelegramBot\Api\Types\Message;
+use yii2bundle\telegram\domain\services\AppService;
 use yii2rails\domain\repositories\BaseRepository;
 
 /**
@@ -24,7 +25,7 @@ class ResponseRepository extends BaseRepository implements ResponseInterface {
     protected $app;
     public $columns = 3;
 
-    public function setApp(AppLib $app) {
+    public function setApp(AppService $app) {
         $this->app = $app;
     }
 

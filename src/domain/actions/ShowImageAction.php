@@ -14,7 +14,7 @@ class ShowImageAction extends BaseAction {
     public $parseMode = null;
 
 	public function run(Message $message) {
-        $this->app->response->sendImage($message, $this->pic, $this->caption, $this->replyToMessageId, $this->replyMarkup, $this->disableNotification, $this->parseMode);
+        \App::$domain->telegram->app->response->sendImage($message, $this->pic, $this->caption, $this->replyToMessageId, $this->replyMarkup, $this->disableNotification, $this->parseMode);
 	}
 	
 }
