@@ -19,6 +19,11 @@ use yii2rails\domain\services\base\BaseActiveService;
  */
 class UserAssignmentService extends BaseActiveService implements UserAssignmentInterface {
 
+    public function detach($userId, $roleName) {
+        $assignmentEntity = $this->repository->oneByParams($userId, $roleName);
+        $this->repository->delete($assignmentEntity);
+    }
+
     public function add($userId, $roleName) {
         try {
             $assignmentEntity = $this->repository->oneByParams($userId, $roleName);

@@ -29,6 +29,15 @@ class UserService extends BaseActiveService implements UserInterface {
         $this->repository->update($userEntity);
     }
 
+    public function oneByUsername($username) {
+        $query = new Query;
+        $query->andWhere(['username' => $username]);
+        $query->with('assignments');
+        /** @var UserEntity $userEntity */
+        $userEntity = $this->one($query);
+        return $userEntity;
+    }
+
     public function oneByFrom($from, $botId) {
         try {
             $query = new Query;

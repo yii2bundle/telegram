@@ -24,7 +24,7 @@ class m190427_121835_create_telegram_route_table extends Migration {
 			'class' => $this->string()->notNull(),
 			'expression' => $this->string(),
 			'params_json' => $this->string()->notNull(),
-			'action_id' => $this->integer()->notNull(),
+			'action_id' => $this->integer()->null(),
 			'action_params_json' => $this->string()->notNull(),
 			'status' => $this->integer()->notNull()->defaultValue(1),
 		];
