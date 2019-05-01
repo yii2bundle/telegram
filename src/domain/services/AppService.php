@@ -6,6 +6,7 @@ use TelegramBot\Api\BotApi;
 use TelegramBot\Api\Client;
 use yii\web\NotFoundHttpException;
 use yii2bundle\telegram\domain\entities\BotEntity;
+use yii2bundle\telegram\domain\entities\RequestEntity;
 use yii2bundle\telegram\domain\entities\UserEntity;
 use yii2bundle\telegram\domain\interfaces\services\UserInterface;
 use yii2rails\domain\services\base\BaseService;
@@ -39,13 +40,20 @@ class AppService extends BaseService /*implements AppInterface*/ {
      */
     public $userEntity;
 
+    public function getRequest() {
+        $req = file_get_contents('php://input');
+        $request = \GuzzleHttp\json_decode($req);
+        //$requestEntity = new RequestEntity((array)$request);
+        $requestEntity = $request;
+        return $requestEntity;
+    }
+
     public function setBot(BotEntity $botEntity) {
         $this->botId = $botEntity->id;
         $this->bot = new Client($botEntity->token);
 
-        $req = file_get_contents('php://input');
-        $request = \GuzzleHttp\json_decode($req);
-        $this->userEntity = \App::$domain->telegram->user->oneByFrom($request->message->from, $this->botId);
+        $requestEntity = $this->getRequest();
+        $this->userEntity = \App::$domain->telegram->user->oneByFrom($requestEntity->message->from, $this->botId);
 
         try {
             \App::$domain->telegram->bot->oneById($botEntity->id);

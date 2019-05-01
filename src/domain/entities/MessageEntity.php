@@ -10,8 +10,8 @@ use yii2rails\domain\BaseEntity;
  * @package yii2bundle\telegram\domain\entities
  * 
  * @property $id
- * @property $from
- * @property $chat
+ * @property FromEntity $from
+ * @property ChatEntity $chat
  * @property $date
  * @property $text
  */
@@ -22,5 +22,13 @@ class MessageEntity extends BaseEntity {
 	protected $chat;
 	protected $date;
 	protected $text;
+
+    public function fieldType()
+    {
+        return [
+            'from' => FromEntity::class,
+            'chat' => ChatEntity::class,
+        ];
+    }
 
 }

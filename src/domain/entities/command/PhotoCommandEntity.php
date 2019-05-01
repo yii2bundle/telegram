@@ -6,7 +6,6 @@ use TelegramBot\Api\Types\Message;
 use yii2rails\domain\BaseEntity;
 
 /**
- * @property $chat_id
  * @property $photo
  * @property $caption
  * @property $reply_to_message_id
@@ -14,9 +13,8 @@ use yii2rails\domain\BaseEntity;
  * @property $disable_notification
  * @property $parse_mode
  */
-class PhotoCommandEntity extends BaseEntity {
+class PhotoCommandEntity extends BaseCommandEntity {
 
-    protected $chat_id;
     protected $photo;
     protected $caption = null;
     protected $reply_to_message_id = null;

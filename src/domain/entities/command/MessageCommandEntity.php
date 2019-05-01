@@ -7,7 +7,6 @@ use yii2bundle\telegram\domain\helpers\MenuHelper;
 use yii2rails\domain\BaseEntity;
 
 /**
- * @property $chat_id
  * @property $text
  * @property $parse_mode
  * @property $disable_web_page_preview
@@ -15,9 +14,8 @@ use yii2rails\domain\BaseEntity;
  * @property $reply_markup
  * @property $disable_notification
  */
-class MessageCommandEntity extends BaseEntity {
+class MessageCommandEntity extends BaseCommandEntity {
 
-    protected $chat_id;
     protected $text;
     protected $parse_mode = null;
     protected $disable_web_page_preview = false;

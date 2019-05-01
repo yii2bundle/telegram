@@ -21,17 +21,12 @@ use yii2rails\domain\repositories\BaseRepository;
  */
 class ResponseService extends BaseService implements ResponseInterface {
 
-    public function send($commandEntity) {
-        $bot = \App::$domain->telegram->app->bot;
-        return Message::fromResponse($bot->call($commandEntity->command(), $commandEntity->toArray()));
-    }
-
     public function sendMessage(Message $message, $answerText) {
         $commandEntity = new MessageCommandEntity;
         $commandEntity->chat_id = $message->getChat()->getId();
         $commandEntity->text = $answerText;
         $commandEntity->parse_mode = 'markdown';
-        return $this->send($commandEntity);
+        return $this->repository->send($commandEntity);
     }
 
     public function sendKeyboard(Message $message, $answerText, $keys, $columns = 3) {
@@ -40,7 +35,7 @@ class ResponseService extends BaseService implements ResponseInterface {
         $commandEntity->text = $answerText;
         $commandEntity->parse_mode = 'markdown';
         $commandEntity->setKeyboard($keys, $columns);
-        return $this->send($commandEntity);
+        return $this->repository->send($commandEntity);
     }
 
     public function sendImage(Message $message, $photo, $caption = null, $replyToMessageId = null, $replyMarkup = null, $disableNotification = false, $parseMode = null) {
@@ -48,7 +43,7 @@ class ResponseService extends BaseService implements ResponseInterface {
         $commandEntity->chat_id = $message->getChat()->getId();
         $commandEntity->photo = $photo;
         $commandEntity->caption = $caption;
-        return $this->send($commandEntity);
+        return $this->repository->send($commandEntity);
     }
 
 }
