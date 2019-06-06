@@ -28,7 +28,7 @@ use yii2rails\extension\common\helpers\ClassHelper;
 class SessionService extends BaseService /*implements SessionInterface*/ {
 
     public function set($key, $val) {
-        $session = $this->getSession();
+        $session = $this->get();
         $session[$key] = $val;
         \App::$domain->telegram->app->userEntity->session = json_encode($session);
         \App::$domain->telegram->user->update(\App::$domain->telegram->app->userEntity);

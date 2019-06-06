@@ -10,6 +10,9 @@ $domains = include(ROOT_DIR . '/telegram/config/domains.php');
 DomainHelper::forgeDomains2($domains);
 
 $botToken = ArrayHelper::getValue($_GET, 'token');
+if(empty($botToken)) {
+    throw new \yii\base\InvalidArgumentException('Empty token!');
+}
 $botEntity = \App::$domain->telegram->bot->oneByParam($botToken);
 
 \App::$domain->telegram->app->setBot($botEntity);
